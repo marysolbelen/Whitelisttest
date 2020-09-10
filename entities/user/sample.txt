@@ -1,0 +1,171 @@
+/*
+import (
+	"database/sql"
+	"fmt"
+	"net/http"
+	"os"
+	"regexp"
+
+	"github.com/gchaincl/dotsql"
+	"gopkg.in/gomail.v2"
+
+	"FDSAP-RG-V1.1/config"
+	"FDSAP-RG-V1.1/controller"
+)
+
+var err error
+var errPostgres error
+
+// smtpServer data to smtp server.
+type smtpServer struct {
+	host string
+	port string
+}
+
+// Address URI to smtp server.
+func (s *smtpServer) Address() string {
+	return s.host + ":" + s.port
+}
+
+func validateEmail(email string) bool {
+	Re := regexp.MustCompile(`^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$`)
+	return Re.MatchString(email)
+
+}
+
+func validateName(name string) bool {
+	Re := regexp.MustCompile(`^[a-zA-Z]+$`)
+	return Re.MatchString(name)
+}
+
+func Register(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		fname := r.FormValue("fname")
+		lname := r.FormValue("lname")
+		uname := r.FormValue("uname")
+		email := r.FormValue("email")
+		pass := r.FormValue("pass")
+		confpass := r.FormValue("confpass")
+
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			fmt.Println("Something went wrong in generating hass password. Please try again.")
+		}
+
+		port := os.Getenv("PORT")
+
+		//Username Validation
+		userSQLStatement := `
+		SELECT username 
+		FROM ACCOUNTS 
+		WHERE username=$1;`
+
+		var username string
+		row := config.DbPostgres.QueryRow(userSQLStatement, uname)
+
+		switch err := row.Scan(&username); err {
+		case sql.ErrNoRows:
+			//Email Validation
+			emailSQLStatement := `
+			SELECT email 
+			FROM ACCOUNTS 
+			WHERE email=$1;`
+
+			var Email string
+			row := config.DbPostgres.QueryRow(emailSQLStatement, email)
+			switch err := row.Scan(&Email); err {
+			case sql.ErrNoRows:
+				//Password Validation
+				password := pass
+				hash, err := controller.HashPassword(confpass)
+
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusInternalServerError)
+					fmt.Println("Something went wrong in generating hash password. Please try again.")
+				}
+
+				userHash, err := controller.HashPassword(uname)
+
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusInternalServerError)
+					fmt.Println("Something went wrong in generating hash password. Please try again.")
+				}
+
+				match := controller.CheckPasswordHash(password, hash)
+
+				switch match {
+				case true:
+					dot, err := dotsql.LoadFromFile("queries.sql")
+					if err != nil {
+						w.Write([]byte("err"))
+						panic(err)
+					}
+
+					if _, err := dot.Exec(config.DbPostgres, "createUser", uname, string(hash), fname, lname, email, string(userHash)); err != nil {
+						w.Write([]byte("userError"))
+						panic(err)
+					}
+
+					//Send Email Confirmation
+					m := gomail.NewMessage()
+					m.SetHeader("From", "fdsap@fortress-asya.com")
+					m.SetHeader("To", email)
+					m.SetHeader("Subject", "FDSAP Account Confirmation - Do not Reply")
+					m.SetBody("text/html", //ui)
+
+					d := gomail.NewDialer("smtp.gmail.com", 587, "kier.stampinigroup@gmail.com", "loremipsumamet")
+
+					// Send the email to Bob, Cora and Dan.
+					if err := d.DialAndSend(m); err != nil {
+						w.Write([]byte("sendError"))
+						panic(err)
+					}
+
+					w.Write([]byte(
+						//ui
+					))
+				case false:
+					w.Write([]byte("notMatch"))
+					fmt.Println("Password Doesn't Match")
+				}
+
+			case nil:
+				w.Write([]byte("emailExist"))
+			default:
+				panic(err)
+			}
+		case nil:
+			w.Write([]byte("unameExist"))
+		default:
+			panic(err)
+		}
+	}
+}
+		if err == nil {
+			w.Write([]byte("Status 404"))
+		} else {
+			w.Write([]byte("Status 200"))
+		}
+		/*if err != nil {
+			// If the error is of any other type, send a 500 status
+			w.WriteHeader(http.StatusInternalServerError)
+			return nil, err
+		}
+		//cls = append(cls, cl)
+		w.Write([]byte("Status 200"))*/
+	}
+	/*if err == sql.ErrNoRows {
+		//fmt.Println("invalid username/password")
+		w.Write([]byte("Status 404"))
+		return nil, err
+
+	}
+	fmt.Println("Status 404")
+	*/
+	//if err = rows.Err(); err != nil {
+	//	return nil, err
+
+//	}
+	//fmt.Println(cls)
+	//return cls, nil
+*/

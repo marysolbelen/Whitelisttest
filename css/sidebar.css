@@ -1,0 +1,53 @@
+.sidebar {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #F5F5F5;
+    overflow-x: hidden;
+    padding-top: 20px;
+   /* font-family: 'Roboto', sans-serif;*/
+   font-family: 'Glyphicons Halflings';
+  }
+  .sidebar a:link {
+    display: block;
+    color: black;
+    padding: 16px 25px;
+    font-family: 'Glyphicons Halflings';
+    text-decoration: none;
+    font-size: 16px;
+  }
+  .sidebar a.active {
+    background-color: #8DC26F;
+    color: white;
+    font-family: 'Glyphicons Halflings';
+  }
+  .sidebar a.visited {
+    color: black;
+    font-family: 'Glyphicons Halflings';
+  }
+
+  .sidebar a:hover:not(.active) {
+    background-color: #8DC26F;
+    color: white;
+    width: 100%;
+    font-family: 'Glyphicons Halflings';
+  }
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+  }
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+      font-family: 'Glyphicons Halflings';
+    }
+}

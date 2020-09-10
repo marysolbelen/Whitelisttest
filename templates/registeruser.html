@@ -1,0 +1,72 @@
+{{ define "registeruser"}}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+		<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+		<link href="../../css/field.css" rel="stylesheet" type="text/css" media="all" />	
+		<title>EMPC</title>
+	</head>
+	<body>
+		<div class="container-fluid particle-js">
+				<div class="row justify-content-center align-items-center">
+					<img class="img-logo" src="../public/static/img/fdsap-logo.png" alt="FDS ASYA PHILIPPINES INC. Logo" >
+				</div>
+				<div class="row justify-content-center align-items-center">
+					<div class=" card login-base">
+						<div class="card login-top animate__animated animate__slideInLeft">
+							<form method="POST" action="/register/user/process" method="post">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form__group field">
+											<input type="text" class="form__field " placeholder="Username" name="fname" id='fname' required />
+											<label for="fname" class="form__label ">Firstname</label>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form__group field">
+											<input type="text" class="form__field " placeholder="Password" name="lname" id='lname' required />
+											<label for="lname" class="form__label ">Lastname</label>
+										</div>
+									</div>
+								</div>
+								
+								
+								<div class="form__group field">
+									<input type="text" class="form__field " placeholder="Username" name="branch" id='branch' required />
+									<label for="branch" class="form__label ">Branch</label>
+								</div>
+								<div class="form__group field">
+									<input type="text" class="form__field " placeholder="Password" name="insti" id='insti' required />
+									<label for="insti" class="form__label ">Institution</label>
+								</div>
+								<div class="form__group field">
+									<input type="text" class="form__field " placeholder="Username" name="username" id='username' required />
+									<label for="username" class="form__label ">Username</label>
+								</div>
+								<div class="form__group field">
+									<input type="password" class="form__field " placeholder="Password" name="password" id='password' required />
+									<label for="password" class="form__label ">Password</label>
+								</div>
+								<input class="btn-1"  type="submit" value="Signup">
+						
+							</form>
+							<p style="text-align:center;margin-top:10px;color:#4b4e52;">Do you have already an Account? <a style="margin-top:10px;color:#4b4e52;" href="/login/user"> Login Now!</a></p>
+							
+						</div>
+					</div>
+				</div>
+		</div>
+
+		<!--Footer-->
+		<footer class="footer">
+		© FDS ASYA PHILIPPINES INC. | 2020
+		</footer>	
+	</body>
+</html>
+{{ end }}
+

@@ -1,0 +1,94 @@
+{{ define "confirmmessage"}}
+{{ template "sidebar"}}
+{{ template "queue"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="#" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#myModal").modal('show');
+	});
+</script>
+</head>
+<body>
+<div class="container">
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+                <h4 class="modal-title">Loan Confirmation - <B>CID: {{.Cid}} </B></h4>
+            </div>
+            <div class="modal-body">
+				<p>Are you sure that this loan has been posted in the system?</p>
+                 <form action="/confirmation/process" method="POST">
+                    <div class="form-group">
+                          Release loan for {{ .Firstname}} {{ .Lastname}}.  <br>
+                   
+                    </div>
+                      <div>
+                    <button type="submit" class="btn success">YES</button>
+                    </div>
+                     <div>
+                    <button type="submit" class="btn success">NO</button>
+                    </div>
+                    <div class="form-group">
+                          <input type="hidden" class="form-control" name="lid" required autofocus value="{{.Lid}}">
+                    </div>
+                    <div class="form-group">
+                          <input type="hidden" class="form-control" name="cid" required autofocus value="{{.Cid}}">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden"  class="form-control" name="amount" value="{{.Amount}}"required="">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="paymentno" value="{{.PaymentNo}}" required="">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="purpose" value="{{.Purpose}}" required="">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="pn" value="{{.PN}}" required="">
+                    </div>
+                     <div class="form-group">
+                        <input type="hidden" class="form-control" name="dateapplied" value="{{.DateApplied}}"required="">
+                    </div>
+                     <div class="form-group">
+                        <input type="hidden" class="form-control" name="encoded" value="{{.Encoded}}" required="">
+                    </div>
+                     <div class="form-group">
+                        <input type="hidden" class="form-control" name="stat" value="{{.Status}}" required="">
+                    </div> 
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="status" value="Assigned" required="">
+                    </div>
+                     <div class="form-group">
+                        <input type="hidden" class="form-control" name="category" value="{{.Category}}" required="">
+                    </div>
+                     <div class="form-group">
+                        <input type="hidden" class="form-control" name="pgroup" value="{{.Pgroup}}"required="">
+                    </div>
+                     <div class="form-group">
+                        <input type="hidden" class="form-control" name="product" value="{{.Product}}" required="">
+                    </div>
+                     <div class="form-group">
+                        <input type="hidden" class="form-control" name="frequency" value="{{.Frequency}}" required="">
+                    </div>
+                     <div class="form-group">
+                        <input type="hidden" class="form-control" name="guarantor" value="{{.Quarantor}}" required="">
+                    </div>   
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
+{{ end }}

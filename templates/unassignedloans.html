@@ -1,0 +1,124 @@
+{{ define "unassignedloans"}}
+
+<!DOCTYPE html>
+<html>
+  <head>
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/navbar.css"  media="all" />
+    <link rel="stylesheet" type="text/css" href="../../css/unassignedloans.css" media="all" />
+    <title> Whitelist </title>
+  </head>
+  <body>
+    <main class="wrapper">
+      {{ template "sidebar"}}
+      <div class="main_content"> 
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-3 ">
+              <div class="card" style="align-items: center;">
+                <div class="  ">
+                  <p><i class="fa fa-user-friends"></i></p>
+                  <h3>11+</h3>
+                  <p><a href="/unassigned/loans" style="color:white">Unassigned Loans</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="card" style="align-items: center;">
+                 <div class="animate__animated animate__slideInDown">
+                  <p><i class="fa fa-exclamation-circle"style="color:grey"></i></p>
+                  <h3>55+</h3>
+                  <p><a href="/queue/form"style="color:grey">My Queue</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="card" style="align-items: center;">
+                 <div class="animate__animated animate__slideInDown">
+                  <p><i class="fa fa-clipboard-check"style="color:grey"></i></p>
+                  <h3>100+</h3>
+                  <p><a href="/assigned/loans"style="color:grey">Completed Loans</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-lg-12 card" id="table">
+                <table id="clientTable" class="display nowrap">
+                  <thead>
+                    <tr>
+                      <th>Client Name</th>
+                      <th>CID</th>
+                      <th>Principal</th>
+                      <th>No. of Payments</th>
+                      <th>Loan Purpose</th>
+                      <th>PN Number</th>
+                      <th>Date Applied</th>
+                      <th> Date Encoded</th>
+                      <th>Status</th>
+                      <th>Assign</th>         
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{ range .}}
+                    <tr>
+                      <td>{{.ClientName}}</td>
+                      <td>{{.Cid}}</td>
+                      <td>{{.Amount}}</td>
+                      <td>{{.PaymentNo}}</td>
+                      <td>{{.Purpose}}</td>
+                      <td>{{.PN}}</td>
+                      <td>{{.DateApplied}} </td>
+                      <td>{{.Encoded}}</td>
+                      <td>{{.Status}}</td>
+                      <td> <a href="/queue/form?lid={{.Lid}}">Assign Loan </a> </td>
+                    </tr>
+                    {{end}}
+                  </tbody>
+                </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script type="text/javascript" charset="utf8" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+
+    <script>
+      $(document).ready( function () {
+        var printCounter = 0;
+        var today = new Date();
+        var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate() + " " + today.getHours()+":"+today.getMinutes() +":"+ today.getSeconds(); ;
+        $('#clientTable').DataTable({   
+          dom: 'Bfrtip',
+          buttons: [
+          {
+            extend: 'excel',
+            messageTop: 'FDSAP Report Generator   '+ date
+          }
+          ],
+          "scrollY": 300,
+          "scrollX": true,
+        });
+      });
+    </script>
+  </body>
+</html>
+{{ end }}

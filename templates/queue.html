@@ -1,0 +1,201 @@
+{{ define "queue"}}
+
+
+<html>
+<head>
+<link rel="shortcut icon" href="#" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+	<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+	<link href="../../css/field.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="/../../card.css" rel="stylesheet" type="css" media="all" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" media="all" />
+
+
+
+<!--panel-->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<style>
+
+
+</style>
+
+</head>
+<div style="position:static; margin-left:350px;">
+<br>
+<br>
+<center>
+
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <p><i class="fa fa-user-friends" style="color:grey"></i></p>
+      <h3>&nbsp</h3>
+      <p><a href="/unassigned/loans" style="color:grey">Unassigned Loans</a></p>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card-active">
+      <p><i class="fa fa-exclamation-circle"></i></p>
+      <h3>1</h3>
+      <p><a href="/unassigned/loans" style="color:white">My Queue</a></p>
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card">
+      <p><i class="fa fa-clipboard-check"style="color:grey"></i></p>
+      <h3>&nbsp</h3>
+       <p><a href="/assigned/loans" style="color:grey">Completed Loans</a></p>
+    </div>
+  </div>
+
+</div>
+</center>
+</div>
+<!--panel-->
+<div class="container" style="margin-left:250px;margin-right:10px;  font-family: 'Times New Roman';
+  font-size: 14px;">
+ <div class="w3-panel w3-gray" style="width:100%;">
+ <br>
+    <p>Product Category: {{.Category}}</p>
+    <p>Product Group: {{.Pgroup}}</p>
+    <p>Product: {{.Product}}</p>
+    <p>Frequency: {{.Frequency}}</p>
+    <p>Quarantor / Co-borrower: {{.Guarantor}}</p>
+ 
+</div>
+</div>
+  <!-- end panel-->
+  <!--table-->
+    
+ <body >
+ {{ template "sidebar"}}
+<form style="width:80%;border-collapse: collapse;box-shadow: 0 0 20px rgba(0,0,0,.4); 
+sborder: 0px solid ;padding: 15px;margin: 2.5%;margin-left:250px;">
+<table id="example" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>LID</th>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Payment No</th>
+                <th>Purpose</th>
+                <th>PN</th>
+                <th>Date Applied</th>
+                <th>Encoded</th>
+                <th>CID</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+      
+            <tr>
+                <td>{{.Lid}}</td>
+                <td>{{.ClientName}}</td>
+                <td>{{.Amount}}</td>
+                <td>{{.PaymentNo}}</td>
+                <td>{{.Purpose}}</td>
+                <td>{{.PN}}</td>
+                <td>{{.DateApplied}} </td>
+                <td>{{.Encoded}}</td>
+                <td>{{.Cid}}</td>
+                <td>{{.Status}}</td>
+                <td> <a id="myBtn"> Confirm Loan</a></td>
+               <!-- <td> <a href="/confirm/loans?lid={{.Lid}}"> Confirm Loan</a></td>-->
+            </tr>
+           
+        </tbody>
+
+    </table>
+    </form>
+</body>
+
+<!--end table-->
+<!-- The Modal -->
+<div id="myModal" class="modal">
+<form action="/confirmation/process" method="POST">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-body">
+      <b>Loan Confirmation - CID: {{ .Cid}} </b><BR>
+       Release loan for {{ .ClientName}}  <br>
+                          Product Category: <b>{{ .Category}} </b><br>
+                          Product Group: <b>{{ .Pgroup}}  </b><br>
+                          Product: <b>{{ .Product}}  </b><br>
+                          Customer Name: <b>{{ .ClientName}}  </b><br>
+                          Customer ID: <b>{{ .Cid}}  </b><br>
+                          Principal: <b>{{ .Amount}}  </b><br>
+                          Number of payments: <b>{{ .PaymentNo}}  </b><br>
+                          Frequency: <b>{{ .Frequency}}  </b><br>
+                          Date Applied: <b>{{ .DateApplied}}  </b><br><br>
+                          Loan Purpose: <b>{{ .Purpose}}  </b><br>
+                          PN Number: <b>{{ .PN}}  </b><br>
+                          Guarantor / Co-borrower: <b> {{ .Guarantor}}  </b>
+                          <input type="hidden" name="category"value="{{.Category}}"/>
+                          <input type="hidden" name="lid"value="{{.Lid}}"/>
+                          <input type="hidden" name="cid"value="{{.Cid}}"/>
+                          <input type="hidden" name="amount"value="{{.Amount}}"/>
+                          <input type="hidden" name="paymentno"value="{{.PaymentNo}}"/>
+                          <input type="hidden" name="purpose"value="{{.Purpose}}"/>
+                          <input type="hidden" name="pn"value="{{.PN}}"/>
+                          <input type="hidden" name="dateapplied"value="{{.DateApplied}}"/>
+                          <input type="hidden" name="encoded"value="{{.Encoded}}"/>
+                          <input type="hidden" name="stat"value="{{.Status}}"/>
+                          <input type="hidden" name="pgroup"value="{{.Pgroup}}"/>
+                          <input type="hidden" name="product"value="{{.Product}}"/>           
+                          <input type="hidden" name="frequency"value="{{.Frequency}}"/>
+                          <input type="hidden" name="guarantor"value="{{.Guarantor}}"/> 
+                          <input type="hidden" name="status" value="Assigned">
+                          
+    </div>
+    <div class="modal-footer">
+  <!-- <span class="close">&times;</span>-->
+  <span class="close">NO</span>
+  <button class="button">YES </button>
+    </form>
+    
+     
+    </div>
+  </div>
+  
+</div>
+<!--End Modal -->
+</html>
+
+<script>
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("myBtn");
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
+</script>
+{{ end }}

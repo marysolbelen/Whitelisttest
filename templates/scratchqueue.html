@@ -1,0 +1,179 @@
+{{ define "scratchqueue"}}
+{{ template "sidebar"}}
+
+<html>
+<head>
+<link rel="shortcut icon" href="#" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/../../card.css" rel="stylesheet" type="css" media="all" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+<!--panel-->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  height: 25%;
+  padding: 0 20px;
+}
+
+.row {margin: 0 -20px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #8DC26F;
+  color: white;
+}
+
+.fa {font-size:50px;}
+</style>
+</head>
+<div style="position:static; margin-left:200px;">
+<center>
+sample
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <p><i class="fa fa-user-friends"></i></p>
+      <h3>11+</h3>
+      <p><a href="/unassigned/loans">Unassigned Loans</a></p>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <p><i class="fa fa-exclamation-circle"></i></p>
+      <h3>55+</h3>
+      <p><a href="/unassigned/loans">My Queue</a></p>
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card">
+      <p><i class="fa fa-clipboard-check"></i></p>
+      <h3>100+</h3>
+       <p><a href="/completed/loans">Completed Loans</a></p>
+    </div>
+  </div>
+
+</div>
+end
+</center>
+</div>
+<!--panel-->
+<div class="container">
+ <div class="w3-panel w3-gray" style="width:90%;">
+    <p>I am a panel.</p>
+  
+</div>
+
+  <!-- end panel-->
+  <!--table-->
+  <body style="width:90%; margin-left:230px;">
+   <div class="w3-panel w3-white" style="width:100%;">
+<table id="example" class="table table-striped table-bordered"style="width:80%;border-collapse: collapse;box-shadow: 0 0 20px rgba(0,0,0,.4); border: 0px solid ;padding: 15px;margin: 2.5%;">
+        <thead>
+            <tr>
+             <th>LID</th>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Payment No</th>
+                <th>Purpose</th>
+                <th>PN</th>
+                  <th>Date Applied</th>
+                <th>Encoded</th>
+                <th>CID</th>
+                <th>Status</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+        {{ range .}}
+            <tr>
+          <td>{{.Lid}}</td>
+           <td>{{.Firstname}} {{.Lastname}}</td>
+            <td>{{.Amount}}</td>
+             <td>{{.PaymentNo}}</td>
+              <td>{{.Purpose}}</td>
+                <td>{{.PN}}</td>
+
+                   <td>{{.DateApplied}} </td>
+                <td>{{.Encoded}}</td>
+                <td>{{.Cid}}</td>
+               
+                <td>{{.Status}}</td>
+                
+
+           
+            </tr>
+                {{ end}}
+        </tbody>
+        <tfoot>
+            <tr>
+                 <th>CID</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Date</th>
+                  <th>Contact</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Date</th>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</div>
+</div>
+<!--end table-->
+</html>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
+</script>
+{{ end }}

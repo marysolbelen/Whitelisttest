@@ -1,0 +1,15 @@
+.card {
+    -webkit-box-shadow: inset 0px 0px 9px 1px rgb(0 0 0 / 23%);
+    -moz-box-shadow: inset 0px 0px 9px 1px rgb(0 0 0 / 23%);
+    box-shadow: inset 0px 0px 9px 1px rgb(0 0 0 / 23%);
+
+    margin-top: 20px;
+    padding: 20px;
+    
+}
+
+#table{
+    margin-top: 20px;
+}
+
+

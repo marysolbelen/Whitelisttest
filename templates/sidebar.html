@@ -1,0 +1,17 @@
+{{ define "sidebar"}}
+    <div class="sidebar">
+        <h2>Whitelist</h2>
+        <label stye="font-size:16px;"> <b>{{.Fname}}</b></label><br>
+        <ul>
+            <li><a href="/unassigned/loans"><i class="fas fa-file-alt"></i>Loans</a></li>
+            <li><a href="/uploadfile"><i class="fas fa-file-upload"></i>Upload File</a></li>
+            <li><a href="/client/lists"><i class="fas fa-list"></i>Clients List</a></li>
+            <li><a href="/client?newcid="><i class="fas fa-user-check"></i>Client Check</a></li>
+            <li><a href="/login/user"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+        </ul> 
+        <div class="footer">
+          © FDS ASYA PHILIPPINES INC. | 2020
+        </div>
+    </div>
+
+{{ end }}

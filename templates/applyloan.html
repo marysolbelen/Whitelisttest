@@ -1,0 +1,103 @@
+{{ define "applyloan"}}
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+<link href="../../css/field.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="shortcut icon" href="#" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<head>
+	<title>Apply Loan</title>
+</head>
+<body onload="myFunction()">
+<div class="form-group row">
+    
+	<div class="main-w3layouts wrapper" >
+		<h1>Apply Loan</h1>	
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+				<form action="/apply/loan/process" method="POST">
+				  <div class="col-xs-4">
+				  <label >CID</label>
+					<input class="text" type="text" name="cid" required=""placeholder="cid"><br>
+					</div>
+					<div class="col-xs-4">
+					<label >Amount</label>
+					<input class="text" type="text" name="amount" placeholder="Amount" required="" ><br>
+          		   </div>
+					 <div class="col-xs-4">
+					 <label >Payment No</label>
+					  <input class="text" type="text" name="paymentno" placeholder="paymentno" required=""><br>
+					 </div>
+					<div class="col-xs-6">
+					<label >Purpose</label>
+					<input class="text" type="text" name="purpose" placeholder="purpose"  required=""><br>
+                     </div>
+					<div class="col-xs-6">
+					<label >PN No.</label>
+					<input class="text" type="text" name="pn" id="date" placeholder="pn" required=""><br>
+					 </div>
+					<div class="col-xs-4">
+					<label >Date Applied</label>
+					<input class="text" type="text" name="dateapplied" placeholder="Date Applied" required=""><br>
+          		     </div>
+					   <div class="col-xs-4">
+					   <label >Encoded</label>
+					  <input class="text" type="text" name="encoded" placeholder="Encoded" required=""><br>
+					  </div>
+
+					<div class="col-xs-4">
+					<label >Category</label>
+					<input class="text" type="text" name="category" placeholder="Category" required=""><br>
+          		      </div>
+					  <div class="col-xs-6">
+					  <label >Product Group</label>
+					  <input class="text" type="text" name="pgroup" placeholder="Product Group" required=""><br>
+					  </div>
+
+					<div class="col-xs-6">
+					<label >Product</label>
+					<input class="text" type="text" name="product" placeholder="Product" required=""><br>
+					  </div>
+					<div class="col-xs-4">
+					<label >Frequency </label>
+					<input class="text" type="text" name="frequency" placeholder="Frequency" required=""><br>
+          		     </div>
+					 <div class="col-xs-4">
+					 <label >Guarantor</label>
+					  <input class="text" type="text" name="guarantor" placeholder="Guarantor" required=""><br>
+  				</div>
+  					<div class="col-xs-4">
+					<input class="hidden" type="text" name="status" placeholder="status"value="Unassigned"required=""><br>
+					  </div>
+					<div class="wthree-text">
+						<div class="clear"> </div>
+					</div>
+					<input type="submit" value="Apply">
+					<!--<p><a href="/view?appID={{.AppID}}"> View my applied loans</a></p>-->
+				</form>
+			</div>
+		</div>
+		<div class="colorlibcopy-agile">
+			<p>EMPC Loan </p>
+		</div>
+	</div>
+<script>
+var dt = new Date();
+document.getElementById("datetime").innerHTML = dt.toLocaleDateString();
+//document.getElementById("datetime").innerHTML = dt.getDate();
+
+    
+</script>
+</div>
+</body>
+</html>
+{{end}}
+<!--
+git config --global user.email "marysolbelen@fortress-asya.com"
+git config --global user.name "marysolbelen"	
+-->
