@@ -1,0 +1,10 @@
+package: Whiteliststest
+import:
+- package: github.com/360EntSecGroup-Skylar/excelize
+- package: github.com/dustin/go-humanize
+- package: github.com/gorilla/sessions
+- package: github.com/joho/godotenv
+- package: github.com/lib/pq
+- package: golang.org/x/crypto
+  subpackages:
+  - bcrypt

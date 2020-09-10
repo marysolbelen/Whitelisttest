@@ -1,0 +1,62 @@
+hash: 638c935cd5be9e873ad4a906ba45edca34eab978e899519dcbe08c7dd77d05f7
+updated: 2020-09-10T15:08:20.331551+08:00
+imports:
+- name: github.com/360EntSecGroup-Skylar/excelize
+  version: 01afc6e03f1d28f1806ecd1f3c6c043f6755bd01
+- name: github.com/dustin/go-humanize
+  version: afde56e7acacd811f6c94228c2c61af2b0e93158
+- name: github.com/gorilla/securecookie
+  version: 61b4ad17eb88d0d1118560d1101176279be2bc88
+- name: github.com/gorilla/sessions
+  version: 61fa50d034f99479a7de0d1c02c5e9dea5ad30cb
+- name: github.com/joho/godotenv
+  version: d6ee6871f21dd95e76563a90f522ce9fe75443f8
+- name: github.com/lib/pq
+  version: 083382b7e6fc78cc91eb57afab268fe2f1b6ed6d
+  subpackages:
+  - oid
+  - scram
+- name: github.com/mohae/deepcopy
+  version: c48cc78d482608239f6c4c92a4abd87eb8761c90
+- name: github.com/richardlehane/mscfb
+  version: 961a19b8ef4b9e5ddf8b8c19cda4984a81a2eecd
+- name: github.com/richardlehane/msoleps
+  version: c5f2e09be624c234b2ad655d79d029de6ebf0e54
+  subpackages:
+  - types
+- name: github.com/xuri/efp
+  version: ba689101faaf67e0ce42ca6604e1e9b66a7fdc02
+- name: golang.org/x/crypto
+  version: 5c72a883971a4325f8c62bf07b6d38c20ea47a6a
+  subpackages:
+  - bcrypt
+  - blowfish
+  - md4
+  - ripemd160
+- name: golang.org/x/net
+  version: 62affa334b73ec65ed44a326519ac12c421905e3
+  subpackages:
+  - html
+  - html/atom
+  - html/charset
+- name: golang.org/x/text
+  version: a8b4671254579a87fadf9f7fa577dc7368e9d009
+  subpackages:
+  - encoding
+  - encoding/charmap
+  - encoding/htmlindex
+  - encoding/internal
+  - encoding/internal/identifier
+  - encoding/japanese
+  - encoding/korean
+  - encoding/simplifiedchinese
+  - encoding/traditionalchinese
+  - encoding/unicode
+  - internal/language
+  - internal/language/compact
+  - internal/tag
+  - internal/utf8internal
+  - language
+  - runes
+  - transform
+testImports: []
