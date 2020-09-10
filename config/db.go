@@ -9,11 +9,11 @@ import (
 
 //Heroku Whitelists DB Connection
 const (
-	host     = "ec2-34-232-212-164.compute-1.amazonaws.com"
+	host     = "ec2-54-161-58-21.compute-1.amazonaws.com"
 	port     = 5432
-	user     = "jjamizitlgywmv"
-	password = "6753a5e5cc75e455ffdab7710add7d50cb2c58c1420ad33e594a3d2b5413da74"
-	dbname   = "dt403m0agorkn"
+	user     = "nndlnpvpkykeqw"
+	password = "19db4d26d2d0202bb7f1c0063420951dd9d22d747c5cd89466aed3d1faa8f873"
+	dbname   = "db42rt0ea031a1"
 )
 
 //Heroku DB Connection
