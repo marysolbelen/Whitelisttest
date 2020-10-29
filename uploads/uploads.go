@@ -178,16 +178,21 @@ func UploadFile(w http.ResponseWriter, req *http.Request) {
 			json.Unmarshal(keysBody, &keys)
 
 			//cl := ClientList{}
-			_, err = config.DB.Exec("DELETE FROM tblclient;INSERT INTO tblclient SELECT area, birthday, cid, centername, contact, flag, lengthofmembership, membername, newbranchcode, newcid, recognizeddate, sn, unit FROM json_populate_recordset(NULL::tblclient,  '" + string(keysBody) + "')")
+			//_, err = config.DB.Exec("DELETE FROM tblclient;INSERT INTO tblclient SELECT area, birthday, cid, centername, contact, flag, lengthofmembership, membername, newbranchcode, newcid, recognizeddate, sn, unit FROM json_populate_recordset(NULL::tblclient,  '" + string(keysBody) + "')")
+			_, err = config.DB.Exec("INSERT INTO tblclient SELECT area, birthday, cid, centername, contact, flag, lengthofmembership, membername, newbranchcode, newcid, recognizeddate, sn, unit FROM json_populate_recordset(NULL::tblclient,  '" + string(keysBody) + "') ON CONFLICT (cid) DO UPDATE SET cid = EXCLUDED.cid ")
+			//_, err = config.DB.Exec("INSERT INTO tblclient SELECT area, birthday, cid, centername, contact, flag, lengthofmembership, membername, newbranchcode, newcid, recognizeddate, sn, unit FROM json_populate_recordset(NULL::tblclient,  '" + string(keysBody) + "')")
 			//	_, err = config.DB.Exec("INSERT INTO tblclient(area, bday, cid, centername, contact, flag, mlength, membername, bcode, newcid, rdate, sn, unit) select * from json_populate_recordset(null::tblclient,  '" + string(keysBody) + "')")
 			//_, err = config.DB.Exec("INSERT INTO tblclient(Area, Birthday, CID, CenterName, Contact, Flag, LengthOfMembership, MemberName, NewBranchCode, NewCID, RecognizedDate, SN, Unit) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)", cl.Area, cl.Birthday, cl.CID, cl.CenterName, cl.Contact, cl.Flag, cl.LengthOfMembership, cl.MemberName, cl.NewBranchCode, cl.NewCID, cl.RecognizedDate, cl.SN, cl.Unit)
 			//_, err = config.DB.Exec("INSERT INTO tblclient (Area, Birthday, CID, CenterName, Contact, Flag, LengthOfMembership, MemberName, NewBranchCode, NewCID, RecognizedDate, SN, Unit) select * from json_populate_recordset(null::tblclient,  '" + string(keysBody) + "')")
 
-			if err != nil {
+			if extension != ".csv" {
+				//w.Write([]byte("It's not CSV file"))
+				config.TPL.ExecuteTemplate(w, "invalidfile", nil)
+			} else if err != nil {
 				//http.Error(w, http.StatusText(500), http.StatusInternalServerError)
-				log.Println("Invalid File: ", err)
-
-				config.TPL.ExecuteTemplate(w, "uploadfile", nil)
+				//log.Println("Invalid File: ", err)
+				//	w.Write([]byte("There's a duplicate CID in CSV file"))
+				config.TPL.ExecuteTemplate(w, "duplicate", nil)
 
 			} else {
 

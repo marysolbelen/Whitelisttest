@@ -65,6 +65,12 @@ func main() {
 	mux.HandleFunc("/login/user/process", user.LoginUserProcess)
 	mux.HandleFunc("/register/user", user.RegisterUserForm)
 	mux.HandleFunc("/register/user/process", user.RegisterUserProcess)
+
+	//mux.HandleFunc("/update/client", clients.UpdateClientForm)
+	mux.HandleFunc("/update/client", clients.SelectedClient)
+	mux.HandleFunc("/update/client/process", clients.UpdateClientProcess)
+	mux.HandleFunc("/insert/client/process", clients.InsertClientProcess)
+	mux.HandleFunc("/delete/client/process", clients.DeleteClientProcess)
 	//api-json type
 	mux.HandleFunc("/all/loans", loans.GetLoans)
 	mux.HandleFunc("/insert", loans.Insert)

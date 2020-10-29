@@ -99,7 +99,7 @@ func ListofAssigned(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	config.TPL.ExecuteTemplate(w, "assignedloans", ln)
-	config.TPL.ExecuteTemplate(w, "sidebar", user)
+	//config.TPL.ExecuteTemplate(w, "sidebar", user)
 }
 func SelectedLoan(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
@@ -194,7 +194,7 @@ func Queue(w http.ResponseWriter, r *http.Request) {
 	}
 
 	config.TPL.ExecuteTemplate(w, "queue", ln)
-	config.TPL.ExecuteTemplate(w, "sidebar", user)
+	//config.TPL.ExecuteTemplate(w, "sidebar", user)
 }
 func SearchDateProcess(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {

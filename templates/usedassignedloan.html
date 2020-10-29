@@ -1,0 +1,222 @@
+{{ define "sampleassignedloans"}}
+{{ template "sidebar"}}
+
+<html>
+<head>
+<link rel="shortcut icon" href="#" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/../../card.css" rel="stylesheet" type="css" media="all" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.colVis.min.js"></script>
+
+<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" media="all" />
+
+
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+    font-family: 'Times New Roman';
+  font-size: 14px;
+
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  height: 25%;
+  padding: 0 20px;
+}
+
+.row {margin: 0 -20px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+/* Style the counter cards
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+ */
+.card {
+  box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #ffffff;
+  color: white;
+}
+.card-active {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #8DC26F;
+  color: white;
+}
+
+.fa {font-size:50px;}
+</style>
+<title>
+Assigned Loans
+</title>
+<header>
+<div style="position:static; margin-left:370px;">
+<br>
+<br>
+
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <p><i class="fa fa-user-friends"style="color:grey"></i></p>
+      <h3>11+</h3>
+      <p><a href="/unassigned/loans"style="color:grey">Unassigned Loans</a></p>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <p><i class="fa fa-exclamation-circle"style="color:grey"></i></p>
+      <h3>55+</h3>
+      <p><a href="/unassigned/loans"style="color:grey">My Queue</a></p>
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card-active">
+      <p><i class="fa fa-clipboard-check"></i></p>
+      <h3>100+</h3>
+       <p><a href="/assigned/loans"style="color:white">Completed Loans</a></p>
+    </div>
+  </div>
+
+</div>
+
+
+</div>
+</header>
+<body >
+<!--<table id="example" class="table table-striped table-bordered"
+style="width:80%;border-collapse: collapse;box-shadow: 0 0 20px rgba(0,0,0,.4);
+ border: 0px solid ;padding: 15px;margin: 2.5%;">
+  
+
+ -->
+  <form action="/search/dates" style="position:absolute;margin-left:275px;margin-top:80px;">
+ Filter Date Type:<br>
+ Start:
+ <input type="date" name="from" />
+ End:
+ <input type="date" name="to" />
+ <input type="submit" />
+ </form>
+ <form style="width:80%;border-collapse: collapse;box-shadow: 0 0 20px rgba(0,0,0,.4);
+ border: 0px solid ;padding: 15px;margin: 2.5%;margin-left:250px;">
+ <br>
+
+ <br>
+ <br>
+
+ <br>
+<div id="printbar" style="margin-left:400px;"></div>
+ <table id="example" class="display">
+        <thead>
+            <tr>
+                <th>LID</th>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Payment No</th>
+                <th>Purpose</th>
+                <th>PN</th>
+                <th>Date Applied</th>
+                <th>Encoded</th>
+                <th>CID</th>
+                <th>Status</th> 
+            </tr>
+        </thead>
+        <tbody>
+        {{ range .}}
+            <tr>
+                <td>{{.Lid}}</td>
+                <td>{{.ClientName}} </td>
+                <td>{{.Amount}}</td>
+                <td>{{.PaymentNo}}</td>
+                <td>{{.Purpose}}</td>
+                <td>{{.PN}}</td>
+                <td>{{.DateApplied}} </td>
+                <td>{{.Encoded}}</td>
+                <td>{{.Cid}}</td>
+                <td>{{.Status}}</td>
+            </tr>
+                {{ end}}
+        </tbody>
+    </table>
+    
+    </form>
+</body>
+</html>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'collection',
+                text: 'Export <i class="fas fa-caret-down"></i>',
+                buttons: [
+                    {  extend: 'copyHtml5',
+                       text: '<i class="fas fa-copy"></i> Copy',
+                       titleAttr: 'Copy' },
+                  {
+                      extend: 'excelHtml5',
+                      text: '<i class="fas fa-file-excel"></i> Excel',
+                      titleAttr: 'Excel'
+                  },
+                  {
+                      extend: 'csvHtml5',
+                      text: '<i class="fas fa-file-csv"></i> CSV',
+                      titleAttr: 'CSV'
+                  },
+                  {
+                      extend: 'pdfHtml5',
+                      text: '<i class="fas fa-file-pdf"></i> PDF',
+                      titleAttr: 'PDF'
+                  },
+                  {
+                      extend: 'print',
+                      text: '<i class="fas fa-print"></i> Print',
+                      titleAttr: 'Print'
+                  }
+                ],
+                dropup: true
+            }
+        ]
+    } );
+      table.text().container().appendTo($('#printbar'));
+} );
+</script>
+{{ end }}

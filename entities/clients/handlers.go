@@ -3,9 +3,44 @@ package clients
 import (
 	"Whiteliststest/config"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
+func UpdateClientForm(w http.ResponseWriter, r *http.Request) {
+	config.TPL.ExecuteTemplate(w, "updateclient", nil)
+	config.TPL.ExecuteTemplate(w, "sidebar", nil)
+}
+func InsertClientProcess(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method != "POST" {
+		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
+		return
+	}
+
+	_, err := InsertClient(r)
+	if err != nil {
+		panic(err)
+		//return
+	}
+
+	http.Redirect(w, r, "/client/lists", http.StatusMovedPermanently)
+
+}
+func DeleteClientProcess(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := DeleteClient(r)
+	if err != nil {
+		http.Error(w, http.StatusText(400), http.StatusBadRequest)
+		return
+	}
+
+	http.Redirect(w, r, "/client/lists", http.StatusSeeOther)
+}
 func ClientLists(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
@@ -34,6 +69,34 @@ func CheckList(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Request-Reference-No", "`1e9ac446-8a62-4ae3-852d-c352ceda99b`")
 	json.NewEncoder(w).Encode(cl)
 
+}
+func SelectedClient(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
+		return
+	}
+	cl, err := OneClient(r)
+	if err != nil {
+		http.Error(w, http.StatusText(500), http.StatusInternalServerError)
+		return
+	}
+	//config.TPL.ExecuteTemplate(w, "sidebar", cl)
+	config.TPL.ExecuteTemplate(w, "updateclient", cl)
+
+}
+func UpdateClientProcess(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
+		return
+	}
+
+	_, err := UpdateClient(r)
+	if err != nil {
+		http.Error(w, http.StatusText(406), http.StatusBadRequest)
+		return
+	}
+	http.Redirect(w, r, "/client/lists", http.StatusMovedPermanently)
+	fmt.Println("Client Updated")
 }
 
 /*

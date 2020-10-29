@@ -7,7 +7,8 @@ import (
 	_ "github.com/lib/pq"
 )
 
-//Heroku Whitelists DB Connection
+//Heroku Whiteliststest DB Connection
+
 const (
 	host     = "ec2-54-161-58-21.compute-1.amazonaws.com"
 	port     = 5432
@@ -36,6 +37,8 @@ const (
 
 var DB *sql.DB
 
+//sslmode=require kapag sa heroku
+//sslmode=disable kapag sa local
 func init() {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=require",

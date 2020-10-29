@@ -1,0 +1,171 @@
+{{ define "samplelistofclients"}}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="https://www.jqueryscript.net/css/jquerysctipttop.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i">
+        <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"> 
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../../css/navbar.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="../../css/listofclients.css" media="all" />
+        <title>Whitelist </title>
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      
+    </head>
+    <body>
+        <main class="wrapper">
+        {{ template "sidebar"}}
+            <div class="main_content"> 
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12 card" id="table">
+                            <table id="clientTable" class="display nowrap">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>Update</th>
+                                        <th>Flag</th>
+                                        <th>SN</th>
+                                        <th>Area</th>
+                                        <th>Unit</th>
+                                        <th>CID</th>
+                                        <th>Center Name</th>
+                                        <th>Member's Name</th>
+                                        <th>Recognized Date</th>
+                                        <th>Birthday</th>
+                                        <th>Length of Membership</th>
+                                        <th>New Branch Code</th>
+                                        <th>New Customer ID</th>
+                                        <th>Contact</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{ range .}}
+                                    <tr>
+                                     <td><center>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                        Launch demo modal
+                                        </button>
+                                        </center></td>
+                                        <td>{{.Flag}}</td>
+                                        <td>{{.SN}} </td>
+                                        <td>{{.Area}} </td>
+                                        <td>{{.Unit}}</td>
+                                        <td>{{.CID}}</td>
+                                        <td>{{.CenterName}}</td>
+                                        <td>{{.MemberName}}</td>
+                                        <td>{{.RecognizedDate}} </td>
+                                        <td>{{.Birthday}} </td>
+                                        <td>{{.LengthOfMembership}}</td>
+                                        <td>{{.NewBranchCode}}</td>
+                                        <td>{{.NewCID}}</td>
+                                        <td>{{.Contact}}</td>
+                                    </tr>
+                                    {{ end}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                         <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="POST" action="/update/client/process">
+                                            <p><input type="text" class="input-sm" name="flag" id="flag"/></p>
+                                            <p><input type="text" class="input-sm" name="sn" id="sn"/></p>
+                                            <p><input type="text" class="input-sm" name="area"  id="area"/></p>
+                                            <p><input type="text" class="input-sm" name="unit"  id="unit"/></p>
+                                            <p><input type="text" class="input-sm" name="cid"  id="cid"/></p>
+                                            <p><input type="text" class="input-sm" name="centername" id="centername"/></p>
+                                            <p><input type="text" class="input-sm" name="membername" id="membername"/></p>
+                                            <p><input type="text" class="input-sm" name="recognizeddate" id="recognizeddate"/></p>
+                                            <p><input type="text" class="input-sm" name="birthday" id="birthday"/></p>
+                                            <p><input type="text" class="input-sm" name="lengthofmembership" id="lengthofmembership"/></p>
+                                            <p><input type="text" class="input-sm" name="newbranchcode" id="newbranchcode"/></p>
+                                            <p><input type="text" class="input-sm" name="newcid" id="newcid"/></p>
+                                            <p><input type="text" class="input-sm" name="contact" id="contact"/></p>
+                                            <input class="btn-1"  type="submit" value="Update ">
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     <!--End-->
+                </div>
+            </div>
+        </main>
+        
+ 
+        <!--Scripts
+        <script type="text/javascript" charset="utf8" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
+        
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+       <script>
+            $('table tbody tr  td').on('click',function(){
+                //$("#exampleModalCenter").modal("show");
+                $("#flag").val($(this).closest('tr').children()[1].textContent);
+                $("#sn").val($(this).closest('tr').children()[2].textContent);
+                $("#area").val($(this).closest('tr').children()[3].textContent);
+                $("#unit").val($(this).closest('tr').children()[4].textContent);
+                $("#cid").val($(this).closest('tr').children()[5].textContent);
+                $("#centername").val($(this).closest('tr').children()[6].textContent);
+                $("#membername").val($(this).closest('tr').children()[7].textContent);
+                $("#recognizeddate").val($(this).closest('tr').children()[8].textContent);
+                $("#birthday").val($(this).closest('tr').children()[9].textContent);
+                $("#lengthofmembership").val($(this).closest('tr').children()[10].textContent);
+                $("#newbranchcode").val($(this).closest('tr').children()[11].textContent);
+                $("#newcid").val($(this).closest('tr').children()[12].textContent);
+                $("#contact").val($(this).closest('tr').children()[13].textContent);
+            });
+        </script>
+        <script>
+            $(document).ready( function () {
+                var printCounter = 0;
+                var today = new Date();
+                var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate() + " " + today.getHours()+":"+today.getMinutes() +":"+ today.getSeconds(); ;
+                $('#clientTable').DataTable({   
+                dom: 'Bfrtip',
+                buttons: [
+                {
+                    extend: 'excel',
+                    messageTop: 'FDSAP Report Generator   '+ date
+                }
+                ],
+                "scrollY": 450,
+                "scrollX": true,
+                "lengthMenu": [[ 50], [ 50]] 
+                });
+            });
+        </script>
+         
+    </body>
+</html>
+{{ end }}

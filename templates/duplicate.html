@@ -1,0 +1,13 @@
+{{ define "duplicate"}}
+<html>
+<body onload="ShowMessage()">
+</body>
+</html>
+<script>
+function ShowMessage()
+{
+      alert('There is a duplicate CID in CSV file');
+      window.location.href='/uploadfile';
+}
+</script>
+{{end}}

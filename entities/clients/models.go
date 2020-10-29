@@ -13,6 +13,7 @@ import (
 	"github.com/gorilla/sessions"
 )
 
+/*
 type Client struct {
 	Cid       string    `json:"cid"`
 	FirstName string    `json:"firstname"`
@@ -21,7 +22,7 @@ type Client struct {
 	Username  string    `json:"username"`
 	Password  string    `json:"password"`
 	Date      time.Time `json:"dateregistered"`
-}
+}*/
 type ClientList struct {
 	Area               string `json:"area"`
 	Birthday           string `json:"birthday"`
@@ -54,6 +55,20 @@ type Log struct {
 
 func InsertClient(r *http.Request) (ClientList, error) {
 	cl := ClientList{}
+	cl.Area = r.FormValue("area")
+	cl.Birthday = r.FormValue("birthday")
+	cl.CID = r.FormValue("cid")
+	cl.CenterName = r.FormValue("centername")
+	cl.Contact = r.FormValue("contact")
+	cl.Flag = r.FormValue("flag")
+	cl.LengthOfMembership = r.FormValue("lengthofmembership")
+	cl.MemberName = r.FormValue("membername")
+	cl.NewBranchCode = r.FormValue("newbranchcode")
+	cl.NewCID = r.FormValue("newcid")
+	cl.RecognizedDate = r.FormValue("recognizeddate")
+	cl.SN = r.FormValue("sn")
+	cl.Unit = r.FormValue("unit")
+
 	fmt.Println(cl)
 	var err error
 	_, err = config.DB.Exec("INSERT INTO tblclient(area, birthday, cid, centername, contact, flag, lengthofmembership, membername, newbranchcode, newcid, recognizeddate, sn, unit) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)", cl.Area, cl.Birthday, cl.CID, cl.CenterName, cl.Contact, cl.Flag, cl.LengthOfMembership, cl.MemberName, cl.NewBranchCode, cl.NewCID, cl.RecognizedDate, cl.SN, cl.Unit)
@@ -63,6 +78,17 @@ func InsertClient(r *http.Request) (ClientList, error) {
 	}
 	log.Println("New Client Added")
 	return cl, nil
+}
+func DeleteClient(r *http.Request) error {
+	cid := r.FormValue("cid")
+	if cid == "" {
+		return errors.New("400. Bad Request.")
+	}
+	_, err := config.DB.Exec("DELETE FROM tblclient WHERE cid=$1;", cid)
+	if err != nil {
+		return errors.New("500. Internal Server Error")
+	}
+	return nil
 }
 
 var Store *sessions.CookieStore
@@ -112,6 +138,46 @@ func AllClients() ([]ClientList, error) {
 	}
 	return cls, nil
 }
+
+func OneClient(r *http.Request) (ClientList, error) {
+	cl := ClientList{}
+	cid := r.FormValue("cid")
+	rows := config.DB.QueryRow("Select area, birthday, cid, centername, contact, flag, lengthofmembership, membername, newbranchcode, newcid, recognizeddate, sn, unit from tblclient where cid=$1;", cid)
+	err := rows.Scan(&cl.Area, &cl.Birthday, &cl.CID, &cl.CenterName, &cl.Contact, &cl.Flag, &cl.LengthOfMembership, &cl.MemberName, &cl.NewBranchCode, &cl.NewCID, &cl.RecognizedDate, &cl.SN, &cl.Unit)
+	if err != nil {
+		return cl, err
+	}
+	return cl, nil
+}
+
+func UpdateClient(r *http.Request) (ClientList, error) {
+	cl := ClientList{}
+	cl.Area = r.FormValue("area")
+	cl.Birthday = r.FormValue("birthday")
+	cl.CID = r.FormValue("cid")
+	cl.CenterName = r.FormValue("centername")
+	cl.Contact = r.FormValue("contact")
+	cl.Flag = r.FormValue("flag")
+	cl.LengthOfMembership = r.FormValue("lengthofmembership")
+	cl.MemberName = r.FormValue("membername")
+	cl.NewBranchCode = r.FormValue("newbranchcode")
+	cl.NewCID = r.FormValue("newcid")
+	cl.RecognizedDate = r.FormValue("recognizeddate")
+	cl.SN = r.FormValue("sn")
+	cl.Unit = r.FormValue("unit")
+	var err error
+	_, err = config.DB.Exec("UPDATE tblclient SET cid=$1,  area = $2, birthday = $3,  centername=$4, contact=$5, flag=$6, lengthofmembership=$7, membername=$8, newbranchcode=$9, newcid=$10, recognizeddate=$11, sn=$12, unit=$13 WHERE cid=$1;", cl.CID, cl.Area, cl.Birthday, cl.CenterName, cl.Contact, cl.Flag, cl.LengthOfMembership, cl.MemberName, cl.NewBranchCode, cl.NewCID, cl.RecognizedDate, cl.SN, cl.Unit)
+
+	if err != nil {
+		//return ln, err
+		log.Println(err)
+
+		return cl, errors.New("500. Internal Server Error." + err.Error())
+	}
+	log.Println("Clien Updated")
+	return cl, nil
+}
+
 func CheckClient(w http.ResponseWriter, r *http.Request) ([]ClientList, error) {
 	newcid := r.FormValue("newcid")
 	//brcode := r.FormValue("brcode")

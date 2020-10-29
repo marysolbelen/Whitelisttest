@@ -1,0 +1,13 @@
+{{ define "invalidfile"}}
+<html>
+<body onload="ShowMessage()">
+</body>
+</html>
+<script>
+function ShowMessage()
+{
+      alert('File uploaded is not CSV file');
+      window.location.href='/uploadfile';
+}
+</script>
+{{end}}
