@@ -8,7 +8,7 @@ import (
 )
 
 //Heroku Whiteliststest DB Connection
-
+/*
 const (
 	host     = "ec2-54-161-58-21.compute-1.amazonaws.com"
 	port     = 5432
@@ -16,7 +16,7 @@ const (
 	password = "19db4d26d2d0202bb7f1c0063420951dd9d22d747c5cd89466aed3d1faa8f873"
 	dbname   = "db42rt0ea031a1"
 )
-
+*/
 //Heroku DB Connection
 /*const (
 	host     = "ec2-34-236-215-156.compute-1.amazonaws.com"
@@ -27,13 +27,13 @@ const (
 )
 */
 //Local DB Connection
-/*const (
+const (
 	host     = "localhost"
 	port     = 5432
 	user     = "postgres"
 	password = "admin"
 	dbname   = "EMPC"
-)*/
+)
 
 var DB *sql.DB
 
@@ -41,7 +41,7 @@ var DB *sql.DB
 //sslmode=disable kapag sa local
 func init() {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
-		"password=%s dbname=%s sslmode=require",
+		"password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
 	var err error
 	DB, err = sql.Open("postgres", psqlInfo)

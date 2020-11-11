@@ -190,9 +190,10 @@ func UploadFile(w http.ResponseWriter, req *http.Request) {
 				config.TPL.ExecuteTemplate(w, "invalidfile", nil)
 			} else if err != nil {
 				//http.Error(w, http.StatusText(500), http.StatusInternalServerError)
-				//log.Println("Invalid File: ", err)
+				log.Println("Invalid File: ", err)
+				panic(err)
 				//	w.Write([]byte("There's a duplicate CID in CSV file"))
-				config.TPL.ExecuteTemplate(w, "duplicate", nil)
+				//	config.TPL.ExecuteTemplate(w, "duplicate", nil)
 
 			} else {
 
