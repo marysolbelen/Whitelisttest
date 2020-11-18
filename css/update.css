@@ -384,6 +384,7 @@
     font-size: 11px;
     line-height: 13px;
     display: flex;
+    position: fixed;
    /* align-items: center;
    display: block;
     position: relative;*/

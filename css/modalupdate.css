@@ -86,11 +86,14 @@ body{
     height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;
+    position: fixed;
   } 
   .card {
     border: 0px solid rgba(0,0,0,.125) !important; 
     background-color: #fff0;
     width: 100%;
+    position: fixed;
+
   }
   label{
     margin-bottom: .05em; 

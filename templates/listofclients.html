@@ -25,13 +25,10 @@
     <body>
         <main class="wrapper">
         {{ template "sidebar"}}
-            <div class="main_content"> 
+            <div class="main_content" > 
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-12 card" id="table">
-                         <div style="position:absolute;margin-top:5px;margin-left:60px;">
-                             
-                                        </div>
                             <table id="clientTable" class="display nowrap">
                                 <thead>
                                     <tr>
@@ -376,7 +373,7 @@
                 var printCounter = 0;
                 var today = new Date();
                 var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate() + " " + today.getHours()+":"+today.getMinutes() +":"+ today.getSeconds(); ;
-                $('#clientTable').DataTable({   
+                $('#clientTable').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                 {
@@ -393,8 +390,15 @@
                 ],
                 "scrollY": 450,
                 "scrollX": true,
-                "lengthMenu": [[ 50], [ 50]] 
+                "lengthMenu": [[ 50], [ 50]] ,
+                //"processing": true ,
+                 "language": {
+     "processing": "DataTables is currently busy"
+  },
+ 
                 });
+                
+  
             });
         </script>  
     </body>
