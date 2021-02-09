@@ -6,6 +6,12 @@ import (
 	"net/http"
 )
 
+func SampeLogin(w http.ResponseWriter, r *http.Request) {
+	config.TPL.ExecuteTemplate(w, "samplelogin", nil)
+}
+func SampleRegister(w http.ResponseWriter, r *http.Request) {
+	config.TPL.ExecuteTemplate(w, "sampleregister", nil)
+}
 func LoginUserForm(w http.ResponseWriter, r *http.Request) {
 	config.TPL.ExecuteTemplate(w, "loginuser", nil)
 }
@@ -47,6 +53,6 @@ func RegisterUserProcess(w http.ResponseWriter, r *http.Request) {
 		//return
 	}
 
-	http.Redirect(w, r, "/login/user", http.StatusMovedPermanently)
+	http.Redirect(w, r, "/samplelogin", http.StatusMovedPermanently)
 
 }

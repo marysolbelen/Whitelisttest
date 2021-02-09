@@ -71,15 +71,19 @@ func main() {
 	mux.HandleFunc("/update/client/process", clients.UpdateClientProcess)
 	mux.HandleFunc("/insert/client/process", clients.InsertClientProcess)
 	mux.HandleFunc("/delete/client/process", clients.DeleteClientProcess)
+	mux.HandleFunc("/samplelogin", user.SampeLogin)
+	mux.HandleFunc("/sampleregister", user.SampleRegister)
 	//api-json type
 	mux.HandleFunc("/all/loans", loans.GetLoans)
 	mux.HandleFunc("/insert", loans.Insert)
+	mux.HandleFunc("/allclients", clients.GetAllClients)
 
 	mux.HandleFunc("/upload/process", upload.UploadFile)
 	mux.HandleFunc("/upload/form", upload.UploadForm)
 
 	mux.HandleFunc("/upload/list", uploadfile.Uploadlists)
 	mux.HandleFunc("/client", clients.CheckList)
+	mux.HandleFunc("/test", clients.SamplePage)
 
 	/*f, err := excelize.OpenFile("temp-file/upload.xlsx")
 	if err != nil {

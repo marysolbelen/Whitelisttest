@@ -384,12 +384,12 @@
     font-size: 11px;
     line-height: 13px;
     display: flex;
-    position: fixed;
    /* align-items: center;
    display: block;
     position: relative;*/
     letter-spacing: 0.02em;
     color: rgba(0, 0, 0, 0.66);
+    position: fixed;
   }
   /* Hide the browser's default checkbox */
   .container input {

@@ -8,15 +8,15 @@ import (
 )
 
 //Heroku Whiteliststest DB Connection
-/*
-const (
+
+/*const (
 	host     = "ec2-54-161-58-21.compute-1.amazonaws.com"
 	port     = 5432
 	user     = "nndlnpvpkykeqw"
 	password = "19db4d26d2d0202bb7f1c0063420951dd9d22d747c5cd89466aed3d1faa8f873"
 	dbname   = "db42rt0ea031a1"
-)
-*/
+)*/
+
 //Heroku DB Connection
 /*const (
 	host     = "ec2-34-236-215-156.compute-1.amazonaws.com"

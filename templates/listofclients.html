@@ -14,6 +14,7 @@
         <link rel="stylesheet" type="text/css" href="../../css/navbar.css" media="all" />
         <link rel="stylesheet" type="text/css" href="../../css/listofclients.css" media="all" />
         <link rel="stylesheet" type="text/css" href="../../css/modalupdate.css"  media="all" />
+         <link rel="stylesheet" type="text/css" href="../../css/loader.css"  media="all" />
         <title>Whitelist </title>
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -22,62 +23,67 @@
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
 
     </head>
-    <body>
+   
+    <body onload="myFunction()">
+      <div id="loader"></div>
+        <div id="loadertext">The data is still loading, please wait.</div>
         <main class="wrapper">
         {{ template "sidebar"}}
-            <div class="main_content" > 
+            <div class="main_content"> 
                 <div class="container">
                     <div class="row justify-content-center">
+                    <div style="display:none;" id="myDiv" class="animate-bottom">
                         <div class="col-lg-12 card" id="table">
-                            <table id="clientTable" class="display nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>Update</th>
-                                        <th>Delete</th>
-                                        <th>Flag</th>
-                                        <th>SN</th>
-                                        <th>Area</th>
-                                        <th>Unit</th>
-                                        <th>CID</th>
-                                        <th>Center Name</th>
-                                        <th>Member's Name</th>
-                                        <th>Recognized Date</th>
-                                        <th>Birthday</th>
-                                        <th>Length of Membership</th>
-                                        <th>New Branch Code</th>
-                                        <th>New Customer ID</th>
-                                        <th>Contact</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{ range .}}
-                                    <tr>
-                                     <td><center>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                        <i class="far fa-edit"></i>
-                                        </button>
-                                        </center></td>
-                                        <td><center>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
-                                        <a href="/delete/client/process?cid={{.CID}}" style="color:white;"><i class="far fa-trash-alt"></i>
-                                        </button>
-                                        </center></td>
-                                        <td>{{.Flag}}</td>
-                                        <td>{{.SN}} </td>
-                                        <td>{{.Area}} </td>
-                                        <td>{{.Unit}}</td>
-                                        <td>{{.CID}}</td>
-                                        <td>{{.CenterName}}</td>
-                                        <td>{{.MemberName}}</td>
-                                        <td>{{.RecognizedDate}} </td>
-                                        <td>{{.Birthday}} </td>
-                                        <td>{{.LengthOfMembership}}</td>
-                                        <td>{{.NewBranchCode}}</td>
-                                        <td>{{.NewCID}}</td>
-                                        <td>{{.Contact}}</td>
-                                    </tr>
-                                    {{ end}}
-                                </tbody>
+                
+                            <table id="clientTable" class="display nowrap" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                            <th>Flag</th>
+                                            <th>SN</th>
+                                            <th>Area</th>
+                                            <th>Unit</th>
+                                            <th>CID</th>
+                                            <th>Center Name</th>
+                                            <th>Member's Name</th>
+                                            <th>Recognized Date</th>
+                                            <th>Birthday</th>
+                                            <th>Length of Membership</th>
+                                            <th>New Branch Code</th>
+                                            <th>New Customer ID</th>
+                                            <th>Contact</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            {{ range .}}
+                                            <tr>
+                                            <td><center>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                                <i class="far fa-edit"></i>
+                                                </button>
+                                                </center></td>
+                                                <td><center>
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                                                <a href="/delete/client/process?cid={{.CID}}" style="color:white;"><i class="far fa-trash-alt"></i>
+                                                </button>
+                                                </center></td>
+                                                <td>{{.Flag}}</td>
+                                                <td>{{.SN}} </td>
+                                                <td>{{.Area}} </td>
+                                                <td>{{.Unit}}</td>
+                                                <td>{{.CID}}</td>
+                                                <td>{{.CenterName}}</td>
+                                                <td>{{.MemberName}}</td>
+                                                <td>{{.RecognizedDate}} </td>
+                                                <td>{{.Birthday}} </td>
+                                                <td>{{.LengthOfMembership}}</td>
+                                                <td>{{.NewBranchCode}}</td>
+                                                <td>{{.NewCID}}</td>
+                                                <td>{{.Contact}}</td>
+                                            </tr>
+                                            {{ end}}
+                                        </tbody>
                             </table>
                       
                          <!--<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addClientModal">
@@ -121,7 +127,7 @@
                                                     <div class="row">
 								                        <div class="col-lg-4">
                                                             <div class="form__group field">
-                                                                <input type="input" class="form__field " placeholder="CID" name="cid" id='cid'  required />
+                                                                <input type="input" class="form__field " placeholder="CID" name="cid" id='cid'  readonly required />
                                                                 <label for="cid" class="form__label ">CID</label>
                                                             </div>
 									                    </div>
@@ -327,8 +333,9 @@
                             </div>
                         </div>
                      <!--End-->
-                    
+                    </div>
                 </div>
+            </div>
             </div>
         </main>
         
@@ -367,13 +374,31 @@
             });
         </script>
         <script>
-        </script>
-        <script>
+function myFunction() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
+</script>
+       <script>
+var myVar;
+
+function myFunction() {
+  myVar = setTimeout(showPage, 1000);
+}
+
+function showPage() {
+  document.getElementById("loadertext").style.display = "none";
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
+</script>
+
+    <script>
             $(document).ready( function () {
                 var printCounter = 0;
                 var today = new Date();
                 var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate() + " " + today.getHours()+":"+today.getMinutes() +":"+ today.getSeconds(); ;
-                $('#clientTable').DataTable({
+                var temployee = $('#clientTable').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                 {
@@ -390,17 +415,13 @@
                 ],
                 "scrollY": 450,
                 "scrollX": true,
-                "lengthMenu": [[ 50], [ 50]] ,
-                //"processing": true ,
-                 "language": {
-     "processing": "DataTables is currently busy"
-  },
- 
+                "lengthMenu": [[ 50], [ 50]],
+                "rowReorder": true,
                 });
-                
-  
+      
             });
         </script>  
+
     </body>
 </html>
 {{ end }}

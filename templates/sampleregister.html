@@ -1,0 +1,243 @@
+{{define "sampleregister"}}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Register V14</title>
+	<meta charset="UTF-8">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vend/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vend/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vend/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vend/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vend/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vend/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* Full-width input fields */
+
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity
+    padding-top: 60px; */
+
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 40%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<h2>Modal Login Form</h2>
+
+<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" id="myBtn2">Login</button>
+
+<div id="id01" class="modal">
+  <form class="modal-content animate" action="/action_page.php" method="post">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+     <img class="img-logo" src="../public/static/img/fdsap-logo.png" alt="FDS ASYA PHILIPPINES INC. Logo" style="height:200px;width:200px;">
+    </div>
+
+    <div class="container mt-3">
+
+    <div class="wrap-input101 validate-input m-b-36" data-validate = "First Name is required">
+						<input class="input101" type="text" name="firstname" id="firstname">
+                        <label for="firstname">First Name</label>
+						<span class="focus-input101"></span>
+					</div>
+    
+    <div class="wrap-input101 validate-input m-b-36" data-validate = "Last Name is required">
+						<input class="input101" type="text" name="lastname" id="lastname">
+                        <label for="lastname">Last Name</label>
+						<span class="focus-input101"></span>
+					</div>
+                     <div class="wrap-input101 validate-input m-b-36" data-validate = "Branch is required">
+						<input class="input101" type="text" name="branch" id="branch">
+                        <label for="branch">Branch</label>
+						<span class="focus-input101"></span>
+					</div>
+                     <div class="wrap-input101 validate-input m-b-36" data-validate = "Institution is required">
+						<input class="input101" type="text" name="institution" id="institution">
+                        <label for="institution">Institution</label>
+						<span class="focus-input101"></span>
+					</div>
+                     <div class="wrap-input101 validate-input m-b-36" data-validate = "Username is required">
+						<input class="input101" type="text" name="username" id="username">
+                        <label for="username">Username</label>
+						<span class="focus-input101"></span>
+					</div>
+                     <div class="wrap-input101 validate-input m-b-36" data-validate = "Password is required">
+						<input class="input101" type="text" name="password" id="password">
+                        <label for="password">Password</label>
+						<span class="focus-input101"></span>
+					</div>
+
+                    <button type="submit"class="login100-form-btn">Login</button>
+                    <p style="text-align:center;margin-top:10px;color:#4b4e52;">Do you have already an Account? <a style="margin-top:10px;color:#4b4e52;" href="/samplelogin"> Login Now!</a></p>
+
+  </form>
+</div>
+<!--===============================================================================================-->
+	<script src="vend/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vend/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vend/bootstrap/js/popper.js"></script>
+	<script src="vend/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vend/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vend/daterangepicker/moment.min.js"></script>
+	<script src="vend/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vend/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+<!--<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>-->
+<script>
+$(document).ready(function(){
+  $("#myBtn2").click(function(){
+    $("#myModal2").modal({backdrop: false});
+  });
+});
+</script>
+</body>
+</html>
+{{ end }}
