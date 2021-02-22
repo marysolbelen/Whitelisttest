@@ -108,7 +108,7 @@ func InsertUser(w http.ResponseWriter, r *http.Request) (Register, error) {
 	rg.Fname = r.FormValue("fname")
 	rg.Lname = r.FormValue("lname")
 	rg.Username = r.FormValue("username")
-	rg.Password = r.FormValue("password")
+	rg.Password = r.FormValue("pass")
 	rg.Branch = r.FormValue("branch")
 	rg.Insti = r.FormValue("insti")
 	userSQLStatement := `
@@ -159,6 +159,81 @@ func InsertUser(w http.ResponseWriter, r *http.Request) (Register, error) {
 	}
 
 	return rg, nil
+}
+func InsertUserTest(w http.ResponseWriter, r *http.Request) (Register, error) {
+
+	rg := Register{}
+	rg.Fname = r.FormValue("fname")
+	rg.Lname = r.FormValue("lname")
+	rg.Username = r.FormValue("username")
+	rg.Password = r.FormValue("textareaID")
+	rg.Branch = r.FormValue("branch")
+	rg.Insti = r.FormValue("insti")
+	fmt.Println(rg)
+	if rg.Fname == "" || rg.Lname == "" || rg.Username == "" || rg.Password == "" {
+		//return rg, errors.New("400. Bad Request. Fields can't be empty.")
+		//w.Write([]byte("Fields can't be empty"))
+
+	} else {
+		userSQLStatement := `
+		SELECT username
+		FROM tbluser
+		WHERE username=$1;`
+
+		//var username string
+		row := config.DB.QueryRow(userSQLStatement, &rg.Username)
+		switch err := row.Scan(&rg.Username); err {
+		case sql.ErrNoRows:
+			//Password Validation
+			password := rg.Password
+			hash, err := HashPassword(password)
+
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				fmt.Println("Something went wrong in generating hash password. Please try again.")
+			}
+
+			// userHash, err := HashPassword(username)
+
+			// if err != nil {
+			// 	http.Error(w, err.Error(), http.StatusInternalServerError)
+			// 	fmt.Println("Something went wrong in generating hash password. Please try again.")
+			// }
+
+			match := CheckPasswordHash(password, hash)
+
+			switch match {
+			case true:
+
+				if _, err = config.DB.Exec("INSERT INTO tbluser (fname, lname, username, password, branch, insti) VALUES ($1, $2, $3, $4, $5, $6)", rg.Fname, rg.Lname, rg.Username, hash, rg.Branch, rg.Insti); err != nil {
+					w.Write([]byte("userError"))
+					panic(err)
+
+				}
+
+			case false:
+				w.Write([]byte("notMatch"))
+				fmt.Println("Password Doesn't Match")
+			}
+
+		case nil:
+			w.Write([]byte("Username exist"))
+		default:
+			panic(err)
+		}
+
+	}
+
+	return rg, nil
+
+	/*var err error
+	_, err = config.DB.Exec("INSERT INTO tbluser(fname, lname, username, password, branch, insti) VALUES ($1, $2, $3, $4, $5, $6)", rg.Fname, rg.Lname, rg.Username, rg.Password, rg.Branch, rg.Insti)
+	if err != nil {
+		log.Println(err)
+		return rg, errors.New("500. Internal Server Error." + err.Error())
+	}
+	log.Println("New User Added")
+	return rg, nil*/
 }
 
 func SignIn(w http.ResponseWriter, r *http.Request) ([]Login, error) {
@@ -239,7 +314,7 @@ func SignIn(w http.ResponseWriter, r *http.Request) ([]Login, error) {
 			if err != nil {
 				log.Println(err)
 			}
-			http.Redirect(w, r, "/unassigned/loans", http.StatusMovedPermanently)
+			http.Redirect(w, r, "/client/lists", http.StatusMovedPermanently)
 
 		case false:
 			http.Redirect(w, r, "/login/user", http.StatusMovedPermanently)

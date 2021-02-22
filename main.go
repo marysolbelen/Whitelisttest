@@ -47,6 +47,7 @@ func main() {
 	//browser
 
 	mux.HandleFunc("/client/lists", clients.ClientLists)
+	mux.HandleFunc("/search/member", clients.Search)
 	//mux.HandleFunc("/login/client", clients.Login)
 	//mux.HandleFunc("/login/client/process", clients.LoginClientProcess)
 	mux.HandleFunc("/loan/lists", loans.LoanLists)
@@ -65,6 +66,8 @@ func main() {
 	mux.HandleFunc("/login/user/process", user.LoginUserProcess)
 	mux.HandleFunc("/register/user", user.RegisterUserForm)
 	mux.HandleFunc("/register/user/process", user.RegisterUserProcess)
+	mux.HandleFunc("/registertest", user.RegisterUserProcessTest)
+	mux.HandleFunc("/password", user.Password)
 
 	//mux.HandleFunc("/update/client", clients.UpdateClientForm)
 	mux.HandleFunc("/update/client", clients.SelectedClient)
@@ -77,63 +80,14 @@ func main() {
 	mux.HandleFunc("/all/loans", loans.GetLoans)
 	mux.HandleFunc("/insert", loans.Insert)
 	mux.HandleFunc("/allclients", clients.GetAllClients)
-
+	//upload
 	mux.HandleFunc("/upload/process", upload.UploadFile)
 	mux.HandleFunc("/upload/form", upload.UploadForm)
-
 	mux.HandleFunc("/upload/list", uploadfile.Uploadlists)
 	mux.HandleFunc("/client", clients.CheckList)
 	mux.HandleFunc("/test", clients.SamplePage)
-
-	/*f, err := excelize.OpenFile("temp-file/upload.xlsx")
-	if err != nil {
-		println(err.Error())
-		return
-	}
-	// Get value from cell by given worksheet name and axis.
-	cell, err := f.GetCellValue("Agusan Del Sur 1", "B7")
-	if err != nil {
-		println(err.Error())
-		return
-	}
-	println(cell)
-	// Get all the rows in the Sheet1.
-	rows, err := f.GetRows("Agusan Del Sur 1")
-	for _, row := range rows {
-		for _, colCell := range row {
-			print(colCell, "\t")
-		}
-		println()
-	}*/
 
 	if err := http.ListenAndServe(":"+port, mux); err != nil {
 		panic(err)
 	}
 }
-
-//fmt record from excel
-/*
-	data, err := ioutil.ReadFile("temp-file/upload.xlsx")
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	// if it was successful in reading the file then
-	// print out the contents as a string
-	fmt.Print(string(data))
-*/
-/*
-	excelFileName := "/temp-file/*.xlsx"
-	xlFile, err := xlsx.OpenFile(excelFileName)
-	if err != nil {
-		panic(err)
-	}
-	for _, sheet := range xlFile.Sheets {
-		for _, row := range sheet.Rows {
-			for _, cell := range row.Cells {
-				fmt.Printf("%s\n", cell.String())
-			}
-		}
-	}
-
-*/

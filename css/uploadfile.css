@@ -7,10 +7,21 @@
     
 }
 
-#table{
-
-}
 
 .container{
     position: fixed;
+
 }
+.pic{
+
+float: right;
+position: relative;
+margin-right: 130px;
+height: auto;
+width: auto;
+
+
+}
+/*.main_content{
+    position: center;
+}*/

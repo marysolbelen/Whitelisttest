@@ -40,6 +40,7 @@ func DeleteClientProcess(w http.ResponseWriter, r *http.Request) {
 	}
 	http.Redirect(w, r, "/client/lists", http.StatusSeeOther)
 }
+
 func ClientLists(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
@@ -51,7 +52,7 @@ func ClientLists(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	config.TPL.ExecuteTemplate(w, "listofclients", cl)
-	//config.TPL.ExecuteTemplate(w, "test1", cl)
+	//config.TPL.ExecuteTemplate(w, "sampletable", cl)
 }
 func GetAllClients(w http.ResponseWriter, r *http.Request) {
 	clt, err := AllClients()
@@ -90,6 +91,19 @@ func SelectedClient(w http.ResponseWriter, r *http.Request) {
 	//config.TPL.ExecuteTemplate(w, "sidebar", cl)
 	config.TPL.ExecuteTemplate(w, "updateclient", cl)
 }
+func Search(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
+		return
+	}
+	cl, err := SearchClient(w, r)
+	if err != nil {
+		http.Error(w, http.StatusText(500), http.StatusInternalServerError)
+		return
+	}
+	//config.TPL.ExecuteTemplate(w, "sidebar", cl)
+	config.TPL.ExecuteTemplate(w, "sampletable", cl)
+}
 func UpdateClientProcess(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
@@ -118,3 +132,17 @@ func LoginClientProcess(w http.ResponseWriter, r *http.Request) {
 	}
 	http.Redirect(w, r, "/apply/loan", http.StatusMovedPermanently)
 }
+
+/*
+func ReturnClient(w http.ResponseWriter, r *http.Request) {
+
+	vars := mux.Vars(r)
+	key := vars["key"]
+	for _, clt := range All() {
+		if clt.cid == key {
+			json.NewEncoder(w).Encode(clt)
+		}
+	}
+
+}
+*/

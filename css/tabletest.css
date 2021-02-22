@@ -1,0 +1,35 @@
+.table-users {
+    position: fixed;
+    border: 1px solid #327a81;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);   
+    column-width: auto;
+    margin-top: 50px;
+}
+
+table {
+    border-style: double;
+    margin-top: 15px;
+ 
+}
+table th {
+    background-color: #900000;
+     color: #ffffff;
+    font-weight: 300;
+    padding: 5px;
+    height: 30px;
+    
+    
+}
+/*
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+
+  }
+  .ex_highlight_row #example tr.even:hover {
+	background-color: #ECFFB3;
+}
+  
+  tr:hover {background-color:#ffe6e6;}
+*/

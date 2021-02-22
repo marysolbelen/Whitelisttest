@@ -14,7 +14,8 @@
         <link rel="stylesheet" type="text/css" href="../../css/navbar.css" media="all" />
         <link rel="stylesheet" type="text/css" href="../../css/listofclients.css" media="all" />
         <link rel="stylesheet" type="text/css" href="../../css/modalupdate.css"  media="all" />
-         <link rel="stylesheet" type="text/css" href="../../css/loader.css"  media="all" />
+         <link rel="stylesheet" type="text/css" href="../../css/loader.css"  media="all" /> 
+         <link rel="stylesheet" type="text/css" href="../../css/tabletest.css" media="all" />
         <title>Whitelist </title>
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -25,17 +26,18 @@
     </head>
    
     <body onload="myFunction()">
+    <div class="limiter">
       <div id="loader"></div>
         <div id="loadertext">The data is still loading, please wait.</div>
-        <main class="wrapper">
+        <main class="wrapper" css="limiter">
         {{ template "sidebar"}}
             <div class="main_content"> 
                 <div class="container">
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center" style="margin-top:30px;background-color:white;">
                     <div style="display:none;" id="myDiv" class="animate-bottom">
                         <div class="col-lg-12 card" id="table">
                 
-                            <table id="clientTable" class="display nowrap" width="100%">
+                            <table id="clientTable" class="display nowrap" width="100%" style="margin-top:30px;">
                                     <thead>
                                         <tr>
                                             <th>Update</th>
@@ -338,11 +340,8 @@
             </div>
             </div>
         </main>
+        </div>
         
- 
-        <!--Scripts
-        <script type="text/javascript" charset="utf8" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
         
         <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -374,52 +373,50 @@
             });
         </script>
         <script>
-function myFunction() {
-   var element = document.body;
-   element.classList.toggle("dark-mode");
-}
-</script>
-       <script>
-var myVar;
+            function myFunction() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+            }
+        </script>
+        <script>
+            var myVar;
+            function myFunction() {
+            myVar = setTimeout(showPage, 1000);
+            }
+            function showPage() {
+            document.getElementById("loadertext").style.display = "none";
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("myDiv").style.display = "block";
+            }
+        </script>
 
-function myFunction() {
-  myVar = setTimeout(showPage, 1000);
-}
-
-function showPage() {
-  document.getElementById("loadertext").style.display = "none";
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("myDiv").style.display = "block";
-}
-</script>
-
-    <script>
-            $(document).ready( function () {
-                var printCounter = 0;
-                var today = new Date();
-                var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate() + " " + today.getHours()+":"+today.getMinutes() +":"+ today.getSeconds(); ;
-                var temployee = $('#clientTable').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                {
-                    extend: 'excel',
-                    messageTop: 'FDSAP Report Generator   '+ date
-                },
+        <script>
+                $(document).ready( function () {
+                    var printCounter = 0;
+                    var today = new Date();
+                    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate() + " " + today.getHours()+":"+today.getMinutes() +":"+ today.getSeconds(); ;
+                    var temployee = $('#clientTable').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
                     {
-                        text: 'Add Client',
-                        action: function ( e, dt, node, config )
+                        extend: 'excel',
+                        messageTop: 'FDSAP Report Generator   '+ date
+                    },
                         {
-                        $('#addClientModal').modal('show')
-                            }
-                    }  
-                ],
-                "scrollY": 450,
-                "scrollX": true,
-                "lengthMenu": [[ 50], [ 50]],
-                "rowReorder": true,
+                            text: 'Add Client',
+                            action: function ( e, dt, node, config )
+                            {
+                            $('#addClientModal').modal('show')
+                                }
+                        }  
+                    ],
+                    "scrollY": 450,
+                    "scrollX": true,
+                    "lengthMenu": [[ 50], [ 50]],
+                    "rowReorder": true,
+                    });
+        
                 });
-      
-            });
         </script>  
 
     </body>

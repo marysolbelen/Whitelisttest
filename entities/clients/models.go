@@ -138,6 +138,30 @@ func AllClients() ([]ClientList, error) {
 	}
 	return cls, nil
 }
+func All(key string) ([]ClientList, error) {
+	//	rows, err := config.DB.Query("SELECT tblLoan.LoanID, tblLoan.firstname, tblLoan.lastname, tblLoan.Contact, tblLoan.amount, tblLoan.Date, tblLoan.Status, tblLoan.AppID, tblRelease.releaseID, tblRelease.appamount, tblRelease.monthly, tblrelease.amortization, tblRelease.branch, tblrelease.appid from tblLoan INNER JOIN tblRelease on tblLoan.LoanID = tblRelease.loanid;")
+	rows, err := config.DB.Query("Select area, birthday, cid, centername, contact, flag, lengthofmembership, membername, newbranchcode, newcid, recognizeddate, sn, unit from tblclient where newcid= '" + key + "';")
+	if err != nil {
+
+		log.Println(err)
+		return nil, err
+
+	}
+	defer rows.Close()
+	cls := make([]ClientList, 0)
+	for rows.Next() {
+		cl := ClientList{}
+		err := rows.Scan(&cl.Area, &cl.Birthday, &cl.CID, &cl.CenterName, &cl.Contact, &cl.Flag, &cl.LengthOfMembership, &cl.MemberName, &cl.NewBranchCode, &cl.NewCID, &cl.RecognizedDate, &cl.SN, &cl.Unit)
+		if err != nil {
+			return nil, err
+		}
+		cls = append(cls, cl)
+	}
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+	return cls, nil
+}
 
 func OneClient(r *http.Request) (ClientList, error) {
 	cl := ClientList{}
@@ -217,6 +241,31 @@ func CheckClient(w http.ResponseWriter, r *http.Request) ([]ClientList, error) {
 	}
 	//cls = append(cls, )
 	w.Write([]byte("Not found"))*/
+	fmt.Println(cls)
+	return cls, nil
+}
+func SearchClient(w http.ResponseWriter, r *http.Request) ([]ClientList, error) {
+	search := r.FormValue("search")
+	rows, err := config.DB.Query("Select area, birthday, cid, centername, contact, flag, lengthofmembership, membername, newbranchcode, newcid, recognizeddate, sn, unit from tblclient where area || cid || centername || membername|| newcid|| unit ~* '" + search + "' ;")
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	defer rows.Close()
+	cls := make([]ClientList, 0)
+	for rows.Next() {
+		cl := ClientList{}
+		err := rows.Scan(&cl.Area, &cl.Birthday, &cl.CID, &cl.CenterName, &cl.Contact, &cl.Flag, &cl.LengthOfMembership, &cl.MemberName, &cl.NewBranchCode, &cl.NewCID, &cl.RecognizedDate, &cl.SN, &cl.Unit)
+		if err != nil {
+			return nil, err
+		}
+		cls = append(cls, cl)
+
+	}
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
 	fmt.Println(cls)
 	return cls, nil
 }
