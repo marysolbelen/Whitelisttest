@@ -2,9 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>	
-<title>Login </title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="#" />
    	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -13,34 +10,34 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
 	<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
 	<link href="../../css/field.css" rel="stylesheet" type="text/css" media="all" />	
-	<!--<title>Whitelist</title>-->
-	
+	<title>Whitelist</title>
 </head>
-<body style="position:absolute;margin-top:50px;margin-left:50px;">
-<div class="row">
-        <div class="col-md-4 offset-md-4">
-            <div class="card shadow-sm mb-2" style="border-radius: 1rem;">
-                <div class="card-header"><h4 class="pt-2">Login</h4></div>
-                <div class="card-body">
-                    <form method="POST">
-                            <div class="form__group field">
-                            <input type="input" class="form__field " placeholder="Username" name="username" id='username' required />
-                            <label for="username" class="form__label ">Username</label>
-                        </div>
-                        <div class="form__group field">
-                            <input type="password" class="form__field " placeholder="Password" name="password" id='password' required />
-                            <label for="password" class="form__label ">Password</label>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-primary float-right" style="width: 50%; border-radius: 25rem;" type="submit">Login</button>
-                        </div>
-                    </form>
-                </div>
-			</div>
-			<p class="text-muted text-center" style="font-size: smaller;">forgot password? <a href="#">click here</a></p>
+<body>
+	<div class="container-fluid particle-js">
+		<div class="row justify-content-center align-items-center">
+            <img class="img-logo" src="../public/static/img/fdsap-logo.png" alt="FDS ASYA PHILIPPINES INC. Logo" >
         </div>
-    </div>
-	
+		<div class="row justify-content-center align-items-center">
+			<div class=" card login-base">
+				<div class="card login-top animate__animated animate__slideInLeft">
+					<form method="POST" action="/login/user/process">
+						<div class="form__group field">
+							<input type="input" class="form__field " placeholder="Username" name="username" id='username' required />
+							<label for="username" class="form__label ">Username</label>
+						</div>
+						<div class="form__group field">
+							<input type="password" class="form__field " placeholder="Password" name="password" id='password' required />
+							<label for="password" class="form__label ">Password</label>
+						</div>
+						<input class="btn-1"  type="submit" value="Login ">
+				
+					</form>
+					<p style="text-align:center;margin-top:10px;color:#4b4e52;">Don't have an Account? <a href="/register/user" style="margin-top:10px;color:#4b4e52;"> Register Now!</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!--Footer-->
 	<footer class="footer">
  	 © FDS ASYA PHILIPPINES INC. | 2020
